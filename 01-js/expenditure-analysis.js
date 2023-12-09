@@ -6,20 +6,24 @@
 */
 
 function calculateTotalSpentByCategory(transactions) {
-  const items =[{
-        itemName1:cookies,
-        category1:Foods,
-        price1:20,
-        total1:60,
-        
-        itemName2:Phone,
-        category2:digital,
-        price2:1000,
-        total2:2000,
+   const categoryTotals = {};
 
-  }]
+   transactions.forEach(transaction => {
+     const { category , price } = transaction;
 
-  console.log(items["category1"] ["total1"], items["category2"] ["total2"]);
+     if(!categoryTotals[category]){
+       categoryTotals[category] =0;
+     }
+
+     categoryTotals[category] += price;
+   });
+
+   return Object.keys(categoryTotals).map(category =>{
+     return {
+        category,
+        totalSpent: categoryTotals[category]
+     };
+   });
 }
 
 module.exports = calculateTotalSpentByCategory;
